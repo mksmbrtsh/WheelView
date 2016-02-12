@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Wheel">
+        <attr name="enable" format="boolean"/>
+        <attr name="start_value" format="integer"/>
+        <attr name="total_number_sectors" format="integer"/>
+        <attr name="total_enable_degree" format="integer"/>
+        <attr name="number_simple_bars_interval" format="integer"/>
+    </declare-styleable>
+
+</resources>
