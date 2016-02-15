@@ -102,10 +102,12 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 				defStyleAttr, 0);
 		mEnable = a.getBoolean(R.styleable.Wheel_enable, true);
 		mFirstValue = a.getInt(R.styleable.Wheel_start_value, 0);
-		mExtNumberOfSector = a.getInt(R.styleable.Wheel_total_number_sectors, 23);
+		mExtNumberOfSector = a.getInt(R.styleable.Wheel_total_number_sectors,
+				23);
 		mTotalEnableDegree = a.getInt(R.styleable.Wheel_total_enable_degree,
 				322);
-		mNumberSimpleBars = a.getInt(R.styleable.Wheel_number_simple_bars_interval, 7);
+		mNumberSimpleBars = a.getInt(
+				R.styleable.Wheel_number_simple_bars_interval, 7);
 		a.recycle();
 		init();
 	}
@@ -115,10 +117,12 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Wheel);
 		mEnable = a.getBoolean(R.styleable.Wheel_enable, true);
 		mFirstValue = a.getInt(R.styleable.Wheel_start_value, 0);
-		mExtNumberOfSector = a.getInt(R.styleable.Wheel_total_number_sectors, 23);
+		mExtNumberOfSector = a.getInt(R.styleable.Wheel_total_number_sectors,
+				23);
 		mTotalEnableDegree = a.getInt(R.styleable.Wheel_total_enable_degree,
 				322);
-		mNumberSimpleBars = a.getInt(R.styleable.Wheel_number_simple_bars_interval, 7);
+		mNumberSimpleBars = a.getInt(
+				R.styleable.Wheel_number_simple_bars_interval, 7);
 		a.recycle();
 		init();
 	}
@@ -222,19 +226,19 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		mBitmapPaintUnable.setAlpha(a);
 		mBitmapPaintRingRadianLine.setColor(0xAA000000);
 		c.drawCircle(w / 2, h / 2,
-				w / 2 - 16 - mBitmapPaintRingRadianLine.getStrokeWidth(),
+				w / 2 - 16 ,
 				mBitmapPaintRingRadianLine);
 		c1.drawCircle(w / 2, h / 2,
-				w / 2 - 16 - mBitmapPaintRingRadianLine.getStrokeWidth(),
+				w / 2 - 16 ,
 				mBitmapPaintRingRadianLine);
 		c.save();
 		c1.save();
 		for (int i1 = 0; i1 <= mExtNumberOfSector; i1++) {
 
-			c.drawLine(w / 2, 16 + mBitmapPaintRingRadianLine.getStrokeWidth(),
+			c.drawLine(w / 2, 16,
 					w / 2, h / 12, mBitmapPaintRingRadianLine);
 			c1.drawLine(w / 2,
-					16 + mBitmapPaintRingRadianLine.getStrokeWidth(), w / 2,
+					16, w / 2,
 					h / 12, mBitmapPaintRingRadianLine);
 			if (i1 == mSelectedSector) {
 				mBitmapPaintTempText.setColor(Color.BLACK);
@@ -247,7 +251,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 							/ 2
 							- mBitmapPaintTempText.measureText(String
 									.valueOf(mFirstValue + i1)) / 2, h / 12
-							+ mBitmapPaintRingRadianLine.getStrokeWidth()
+							+ 
 							- mBitmapPaintTempText.getFontMetricsInt().ascent,
 					mBitmapPaintTempText);
 			c1.drawText(
@@ -256,20 +260,20 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 							/ 2
 							- mBitmapPaintTempText.measureText(String
 									.valueOf(mFirstValue + i1)) / 2, h / 12
-							+ mBitmapPaintRingRadianLine.getStrokeWidth()
+							+ 
 							- mBitmapPaintTempText.getFontMetricsInt().ascent,
 					mBitmapPaintTempText);
 			c.drawLine(w / 2,
-					h / 12 + mBitmapPaintRingRadianLine.getStrokeWidth()
+					h / 12 + 
 							- mBitmapPaintTempText.getFontMetricsInt().ascent
 							+ mBitmapPaintTempText.getFontMetricsInt().descent
-							+ mBitmapPaintRingRadianLine.getStrokeWidth(),
+							,
 					w / 2, h / 2, mBitmapPaintRingRadianLine);
 			c1.drawLine(w / 2,
-					h / 12 + mBitmapPaintRingRadianLine.getStrokeWidth()
+					h / 12 + 
 							- mBitmapPaintTempText.getFontMetricsInt().ascent
 							+ mBitmapPaintTempText.getFontMetricsInt().descent
-							+ mBitmapPaintRingRadianLine.getStrokeWidth(),
+							,
 					w / 2, h / 2, mBitmapPaintRingRadianLine);
 			c.rotate(-mExtAnglePerSector, w / 2, h / 2);
 			c1.rotate(-mExtAnglePerSector, w / 2, h / 2);
@@ -277,13 +281,15 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		mBitmapPaintTempText.setColor(Color.WHITE);
 		c.restore();
 		c1.restore();
+		c.save();
+		c1.save();
 		if (mNumberSimpleBars > 0) {
 			mBitmapPaintRingRadianLine.setStrokeWidth(2);
 			for (int i1 = 0; i1 <= mExtNumberOfSector * mNumberSimpleBars; i1++) {
 
 				c.drawLine(
 						w / 2,
-						16 + mBitmapPaintRingRadianLine.getStrokeWidth(),
+						16,
 						w / 2,
 						h
 								/ 12
@@ -292,7 +298,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 						mBitmapPaintRingRadianLine);
 				c1.drawLine(
 						w / 2,
-						16 + mBitmapPaintRingRadianLine.getStrokeWidth(),
+						16,
 						w / 2,
 						h
 								/ 12
@@ -303,10 +309,10 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 						w / 2,
 						h
 								/ 12
-								+ mBitmapPaintRingRadianLine.getStrokeWidth()
+								+ 
 								- mBitmapPaintTempText.getFontMetricsInt().ascent
 								+ mBitmapPaintTempText.getFontMetricsInt().descent
-								+ mBitmapPaintRingRadianLine.getStrokeWidth()
+								+ 
 								+ 2
 								* mBitmapPaintTempText.getFontMetricsInt().descent,
 						w / 2, h / 2, mBitmapPaintRingRadianLine);
@@ -314,10 +320,10 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 						w / 2,
 						h
 								/ 12
-								+ mBitmapPaintRingRadianLine.getStrokeWidth()
+								+ 
 								- mBitmapPaintTempText.getFontMetricsInt().ascent
 								+ mBitmapPaintTempText.getFontMetricsInt().descent
-								+ mBitmapPaintRingRadianLine.getStrokeWidth()
+								+ 
 								+ 2
 								* mBitmapPaintTempText.getFontMetricsInt().descent,
 						w / 2, h / 2, mBitmapPaintRingRadianLine);
@@ -325,24 +331,45 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 				c1.rotate(-mExtAnglePerSector / mNumberSimpleBars, w / 2, h / 2);
 			}
 		}
+		c.restore();
+		c1.restore();
+		c.rotate(-mTotalEnableDegree, w / 2, h / 2);
+		c1.rotate(-mTotalEnableDegree, w / 2, h / 2);
 		mBitmapPaintRingRadianLine.setStrokeWidth(5);
-
-		final RectF r = new RectF(
-				(float) (w / 2 - (mRadiusExtRing - h / 12 - (-mBitmapPaintTempText.getFontMetricsInt().ascent + mBitmapPaintTempText.getFontMetricsInt().descent) / 2)
-						* Math.cos(360 - mExtAnglePerSector
-								* mExtNumberOfSector)),
-				(float) (h / 2 - (mRadiusExtRing - h / 12 - (-mBitmapPaintTempText
-						.getFontMetricsInt().ascent) / 2)
-						* Math.cos(360 - mExtAnglePerSector
-								* mExtNumberOfSector)),
-				(float) (w / 2 + (mRadiusExtRing - h / 12 - (-mBitmapPaintTempText
-						.getFontMetricsInt().ascent) / 2)
-						* Math.cos(360 - mExtAnglePerSector
-								* mExtNumberOfSector)),
-				(float) (h / 2 + (mRadiusExtRing - h / 12 - (-mBitmapPaintTempText
-						.getFontMetricsInt().ascent) / 2)
-						* Math.cos(360 - mExtAnglePerSector
-								* mExtNumberOfSector)));
+		int offset = h
+				/ 2
+				- (int) (0 + (mRadiusExtRing - h / 12 - (-mBitmapPaintTempText
+						.getFontMetricsInt().ascent + mBitmapPaintTempText
+						.getFontMetricsInt().descent) / 2));
+		final RectF r = new RectF(0 + offset, 0 + offset, w - offset, h
+				- offset);
+		mBitmapPaintRingRadianLine.setColor(Color.WHITE);
+		mBitmapPaintRingRadianLine.setStrokeWidth(2);
+		double A = mBitmapPaintTempText.measureText(String.valueOf(mExtNumberOfSector + mFirstValue));
+		double alpha = Math.toDegrees(Math.atan(A/(r.height())));
+		
+		c.drawArc(r, (int)Math.floor(0 - 90 + mTotalEnableDegree + alpha), (int)Math.ceil(360 - mTotalEnableDegree - 2 * alpha),
+				false, mBitmapPaintRingRadianLine);
+		c1.drawArc(r, (int)Math.floor(0 - 90 + mTotalEnableDegree + alpha), (int)Math.ceil(360 - mTotalEnableDegree - 2 * alpha),
+				false, mBitmapPaintRingRadianLine);
+		c.rotate((int)-alpha, w / 2, h / 2);
+		c1.rotate((int)-alpha, w / 2, h / 2);
+		c.save();
+		c1.save();
+		c.rotate(13, w/2, offset);
+		c1.rotate(13, w/2, offset);
+		c.translate(w/2, offset);
+		c1.translate(w/2, offset);
+		c.drawLine(0, 0, (int)-A, 0, mBitmapPaintRingRadianLine);
+		c1.drawLine(0, 0, (int)-A, 0, mBitmapPaintRingRadianLine);
+		c.restore();
+		c1.restore();
+		c.rotate(-13, w/2, offset);
+		c1.rotate(-13, w/2, offset);
+		c.translate(w/2, offset);
+		c1.translate(w/2, offset);
+		c.drawLine(0, 0, (int)-A, 0, mBitmapPaintRingRadianLine);
+		c1.drawLine(0, 0, (int)-A, 0, mBitmapPaintRingRadianLine);
 		c.save();
 		c1.save();
 		mExtRingTouch = mExtRing;
@@ -364,7 +391,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintStart);
 		mBitmapPaintRingRadianLine.setColor(0xAA000000);
 		c.drawCircle(w / 4, h / 4,
-				w / 4 - mBitmapPaintRingRadianLine.getStrokeWidth(),
+				w / 4,
 				mBitmapPaintRingRadianLine);
 		c.save();
 		mStartButtonGreenTouch = Bitmap.createBitmap(w / 2, h / 2,
@@ -374,7 +401,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 				mRadiusStartButton, 0xFF449D44, 0xFF5CB85C, TileMode.CLAMP));
 		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintStart);
 		c.drawCircle(w / 4, h / 4,
-				w / 4 - mBitmapPaintRingRadianLine.getStrokeWidth(),
+				w / 4,
 				mBitmapPaintRingRadianLine);
 		c.save();
 		mStartButtonGreen = Bitmap.createBitmap(w / 2, h / 2, Config.ARGB_4444);
@@ -383,7 +410,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 				mRadiusStartButton, 0xFF5CB85C, 0xFF449D44, TileMode.CLAMP));
 		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintStart);
 		c.drawCircle(w / 4, h / 4,
-				w / 4 - mBitmapPaintRingRadianLine.getStrokeWidth(),
+				w / 4,
 				mBitmapPaintRingRadianLine);
 		c.save();
 
@@ -395,7 +422,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 				mRadiusStartButton, 0xFF666666, 0xFFaaaaaa, TileMode.CLAMP));
 		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintStart);
 		c.drawCircle(w / 4, h / 4,
-				w / 4 - mBitmapPaintRingRadianLine.getStrokeWidth(),
+				w / 4,
 				mBitmapPaintRingRadianLine);
 		c.save();
 
@@ -416,24 +443,24 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		mBitmapPaintRingRadianLine.setStyle(Style.FILL_AND_STROKE);
 		c.drawPath(path, mBitmapPaintRingRadianLine);
 		path.reset();
-		path.moveTo(w / 2, h / 12 + mBitmapPaintRingRadianLine.getStrokeWidth()
+		path.moveTo(w / 2, h / 12 + 
 				- mBitmapPaintTempText.getFontMetricsInt().ascent
 				+ mBitmapPaintTempText.getFontMetricsInt().descent);
 		path.lineTo(w / 2 + 20,
-				h / 12 + mBitmapPaintRingRadianLine.getStrokeWidth()
+				h / 12 + 
 						- mBitmapPaintTempText.getFontMetricsInt().ascent
 						+ mBitmapPaintTempText.getFontMetricsInt().descent
-						+ mBitmapPaintRingRadianLine.getStrokeWidth() + 2
+						+  + 2
 						* mBitmapPaintTempText.getFontMetricsInt().descent);
 		path.lineTo(w / 2 + 20, h / 2);
 		path.lineTo(w / 2 - 20, h / 2);
 		path.lineTo(w / 2 - 20,
-				h / 12 + mBitmapPaintRingRadianLine.getStrokeWidth()
+				h / 12 + 
 						- mBitmapPaintTempText.getFontMetricsInt().ascent
 						+ mBitmapPaintTempText.getFontMetricsInt().descent
-						+ mBitmapPaintRingRadianLine.getStrokeWidth() + 2
+						+  + 2
 						* mBitmapPaintTempText.getFontMetricsInt().descent);
-		path.lineTo(w / 2, h / 12 + mBitmapPaintRingRadianLine.getStrokeWidth()
+		path.lineTo(w / 2, h / 12 + 
 				- mBitmapPaintTempText.getFontMetricsInt().ascent
 				+ mBitmapPaintTempText.getFontMetricsInt().descent);
 		mBitmapPaintRingRadianLine.setShader(new LinearGradient(w / 2 - 20, 0,
@@ -648,12 +675,13 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		} else if (mTouch == Touchs.startButton) {
 			double r = getRadius(event.getX(), event.getY());
 			if (r <= mRadiusStartButton) {
-				
+
 				drawRings(getWidth(), getHeight());
-				if (mOnTouchRingListener != null && mEnable){
-					if(mSelectedSector != mExtCurrentSector) {
+				if (mOnTouchRingListener != null && mEnable) {
+					if (mSelectedSector != mExtCurrentSector) {
 						mSelectedSector = mExtCurrentSector;
-						mOnTouchRingListener.onStartClick(mFirstValue + mExtCurrentSector);
+						mOnTouchRingListener.onStartClick(mFirstValue
+								+ mExtCurrentSector);
 					}
 				} else
 					mSelectedSector = mExtCurrentSector;
@@ -693,11 +721,12 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 			int currentSector = Math.round(endDegrees / getExtAnglePerSector());
 			if (currentSector > mExtNumberOfSector)
 				currentSector = 0;
-			
+
 			if (mExtCurrentSector != currentSector
 					&& mOnTouchRingListener != null) {
 				mExtCurrentSector = currentSector;
-				mOnTouchRingListener.onCurrentValueChanged(mFirstValue + currentSector);
+				mOnTouchRingListener.onCurrentValueChanged(mFirstValue
+						+ currentSector);
 			} else {
 				mExtCurrentSector = currentSector;
 			}
@@ -845,9 +874,4 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 	public Touchs getTouchState() {
 		return mTouch;
 	}
-
-	/*
-	 * public void setEnabledTemp(boolean constTMP) { mConstTMP = constTMP;
-	 * invalidate(); }
-	 */
 }
