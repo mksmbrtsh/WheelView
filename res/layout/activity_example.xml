@@ -48,7 +48,7 @@
                 whatever:total_number_sectors="2"
                 whatever:start_value="10"
                 whatever:total_enable_degree="100"
-                whatever:number_simple_bars_interval="0" />
+                whatever:number_simple_bars_interval="4" />
 
             <CheckBox
                 android:id="@+id/enable"

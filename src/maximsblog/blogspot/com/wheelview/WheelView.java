@@ -219,27 +219,18 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 				/ 16, 0xFFEA0707, 0xFFA30707, TileMode.CLAMP));
 		mBitmapPaintUnable.setShader(new RadialGradient(w / 2, h / 2, w / 2 - h
 				/ 16, 0xFF666666, 0xFFaaaaaa, TileMode.CLAMP));
-		c.drawCircle(w / 2, h / 2, w / 2 - 16, mBitmapPaintRing);
+		int padding = w / 16;
+		c.drawCircle(w / 2, h / 2, w / 2 - padding, mBitmapPaintRing);
 		int a = mBitmapPaintUnable.getAlpha();
 		mBitmapPaintUnable.setAlpha(255);
-		c1.drawCircle(w / 2, h / 2, w / 2 - 16, mBitmapPaintUnable);
+		c1.drawCircle(w / 2, h / 2, w / 2 - padding, mBitmapPaintUnable);
 		mBitmapPaintUnable.setAlpha(a);
 		mBitmapPaintRingRadianLine.setColor(0xAA000000);
-		c.drawCircle(w / 2, h / 2,
-				w / 2 - 16 ,
-				mBitmapPaintRingRadianLine);
-		c1.drawCircle(w / 2, h / 2,
-				w / 2 - 16 ,
-				mBitmapPaintRingRadianLine);
+		c.drawCircle(w / 2, h / 2, w / 2 - padding, mBitmapPaintRingRadianLine);
+		c1.drawCircle(w / 2, h / 2, w / 2 - padding, mBitmapPaintRingRadianLine);
 		c.save();
 		c1.save();
 		for (int i1 = 0; i1 <= mExtNumberOfSector; i1++) {
-
-			c.drawLine(w / 2, 16,
-					w / 2, h / 12, mBitmapPaintRingRadianLine);
-			c1.drawLine(w / 2,
-					16, w / 2,
-					h / 12, mBitmapPaintRingRadianLine);
 			if (i1 == mSelectedSector) {
 				mBitmapPaintTempText.setColor(Color.BLACK);
 			} else {
@@ -250,31 +241,36 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 					w
 							/ 2
 							- mBitmapPaintTempText.measureText(String
-									.valueOf(mFirstValue + i1)) / 2, h / 12
-							+ 
-							- mBitmapPaintTempText.getFontMetricsInt().ascent,
-					mBitmapPaintTempText);
+									.valueOf(mFirstValue + i1)) / 2, h / 8
+							- mBitmapPaintTempText.getFontMetricsInt().ascent
+							/ 2, mBitmapPaintTempText);
 			c1.drawText(
 					String.valueOf(mFirstValue + i1),
 					w
 							/ 2
 							- mBitmapPaintTempText.measureText(String
-									.valueOf(mFirstValue + i1)) / 2, h / 12
-							+ 
-							- mBitmapPaintTempText.getFontMetricsInt().ascent,
-					mBitmapPaintTempText);
-			c.drawLine(w / 2,
-					h / 12 + 
+									.valueOf(mFirstValue + i1)) / 2, h / 8
 							- mBitmapPaintTempText.getFontMetricsInt().ascent
-							+ mBitmapPaintTempText.getFontMetricsInt().descent
-							,
-					w / 2, h / 2, mBitmapPaintRingRadianLine);
-			c1.drawLine(w / 2,
-					h / 12 + 
-							- mBitmapPaintTempText.getFontMetricsInt().ascent
-							+ mBitmapPaintTempText.getFontMetricsInt().descent
-							,
-					w / 2, h / 2, mBitmapPaintRingRadianLine);
+							/ 2, mBitmapPaintTempText);
+			c.drawLine(
+					w / 2,
+					padding,
+					w / 2,
+					h / 8 + mBitmapPaintTempText.getFontMetricsInt().ascent / 2,
+					mBitmapPaintRingRadianLine);
+			c1.drawLine(
+					w / 2,
+					padding,
+					w / 2,
+					h / 8 + mBitmapPaintTempText.getFontMetricsInt().ascent / 2,
+					mBitmapPaintRingRadianLine);
+			
+			c.drawLine(w / 2, h / 8
+					- mBitmapPaintTempText.getFontMetricsInt().ascent
+			, w / 2, h / 2, mBitmapPaintRingRadianLine);
+			c1.drawLine(w / 2, h / 8
+					- mBitmapPaintTempText.getFontMetricsInt().ascent
+			, w / 2, h / 2, mBitmapPaintRingRadianLine);
 			c.rotate(-mExtAnglePerSector, w / 2, h / 2);
 			c1.rotate(-mExtAnglePerSector, w / 2, h / 2);
 		}
@@ -289,44 +285,28 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 
 				c.drawLine(
 						w / 2,
-						16,
+						padding,
 						w / 2,
-						h
-								/ 12
-								- 2
-								* mBitmapPaintTempText.getFontMetricsInt().descent,
+						h / 8 + 2*mBitmapPaintTempText.getFontMetricsInt().ascent / 3,
 						mBitmapPaintRingRadianLine);
 				c1.drawLine(
 						w / 2,
-						16,
+						padding,
 						w / 2,
-						h
-								/ 12
-								- 2
-								* mBitmapPaintTempText.getFontMetricsInt().descent,
+						h / 8 + 2*mBitmapPaintTempText.getFontMetricsInt().ascent / 3,
 						mBitmapPaintRingRadianLine);
 				c.drawLine(
 						w / 2,
-						h
-								/ 12
-								+ 
-								- mBitmapPaintTempText.getFontMetricsInt().ascent
-								+ mBitmapPaintTempText.getFontMetricsInt().descent
-								+ 
-								+ 2
-								* mBitmapPaintTempText.getFontMetricsInt().descent,
-						w / 2, h / 2, mBitmapPaintRingRadianLine);
+						h/2,
+						w / 2,
+						h / 8 - mBitmapPaintTempText.getFontMetricsInt().ascent + mBitmapPaintTempText.getFontMetricsInt().descent,
+						mBitmapPaintRingRadianLine);
 				c1.drawLine(
 						w / 2,
-						h
-								/ 12
-								+ 
-								- mBitmapPaintTempText.getFontMetricsInt().ascent
-								+ mBitmapPaintTempText.getFontMetricsInt().descent
-								+ 
-								+ 2
-								* mBitmapPaintTempText.getFontMetricsInt().descent,
-						w / 2, h / 2, mBitmapPaintRingRadianLine);
+						h/2,
+						w / 2,
+						h / 8 - mBitmapPaintTempText.getFontMetricsInt().ascent + mBitmapPaintTempText.getFontMetricsInt().descent,
+						mBitmapPaintRingRadianLine);
 				c.rotate(-mExtAnglePerSector / mNumberSimpleBars, w / 2, h / 2);
 				c1.rotate(-mExtAnglePerSector / mNumberSimpleBars, w / 2, h / 2);
 			}
@@ -336,40 +316,42 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		c.rotate(-mTotalEnableDegree, w / 2, h / 2);
 		c1.rotate(-mTotalEnableDegree, w / 2, h / 2);
 		mBitmapPaintRingRadianLine.setStrokeWidth(5);
-		int offset = h
-				/ 2
-				- (int) (0 + (mRadiusExtRing - h / 12 - (-mBitmapPaintTempText
-						.getFontMetricsInt().ascent + mBitmapPaintTempText
-						.getFontMetricsInt().descent) / 2));
+		int offset = padding + h / 8
+				+ mBitmapPaintTempText.getFontMetricsInt().ascent
+				;
 		final RectF r = new RectF(0 + offset, 0 + offset, w - offset, h
 				- offset);
 		mBitmapPaintRingRadianLine.setColor(Color.WHITE);
 		mBitmapPaintRingRadianLine.setStrokeWidth(2);
-		double A = mBitmapPaintTempText.measureText(String.valueOf(mExtNumberOfSector + mFirstValue));
-		double alpha = Math.toDegrees(Math.atan(A/(r.height())));
-		
-		c.drawArc(r, (int)Math.floor(0 - 90 + mTotalEnableDegree + alpha), (int)Math.ceil(360 - mTotalEnableDegree - 2 * alpha),
-				false, mBitmapPaintRingRadianLine);
-		c1.drawArc(r, (int)Math.floor(0 - 90 + mTotalEnableDegree + alpha), (int)Math.ceil(360 - mTotalEnableDegree - 2 * alpha),
-				false, mBitmapPaintRingRadianLine);
-		c.rotate((int)-alpha, w / 2, h / 2);
-		c1.rotate((int)-alpha, w / 2, h / 2);
+		double A = mBitmapPaintTempText.measureText(String
+				.valueOf(mExtNumberOfSector + mFirstValue));
+		double alpha = Math.toDegrees(Math.atan(A / (r.height()))) + 3;
+
+		c.drawArc(r, (int) Math.floor(0 - 90 + mTotalEnableDegree + alpha),
+				(int) Math.ceil(360 - mTotalEnableDegree - 2 * alpha), false,
+				mBitmapPaintRingRadianLine);
+		c1.drawArc(r, (int) Math.floor(0 - 90 + mTotalEnableDegree + alpha),
+				(int) Math.ceil(360 - mTotalEnableDegree - 2 * alpha), false,
+				mBitmapPaintRingRadianLine);
+		c.rotate((int) -alpha, w / 2, h / 2);
+		c1.rotate((int) -alpha, w / 2, h / 2);
 		c.save();
 		c1.save();
-		c.rotate(13, w/2, offset);
-		c1.rotate(13, w/2, offset);
-		c.translate(w/2, offset);
-		c1.translate(w/2, offset);
-		c.drawLine(0, 0, (int)-A, 0, mBitmapPaintRingRadianLine);
-		c1.drawLine(0, 0, (int)-A, 0, mBitmapPaintRingRadianLine);
+		c.rotate(10, w / 2, offset);
+		c1.rotate(10, w / 2, offset);
+		c.translate(w / 2, offset);
+		c1.translate(w / 2, offset);
+		int lenghtArrow = (int) -A / 2;
+		c.drawLine(0, 0, lenghtArrow, 0, mBitmapPaintRingRadianLine);
+		c1.drawLine(0, 0, lenghtArrow, 0, mBitmapPaintRingRadianLine);
 		c.restore();
 		c1.restore();
-		c.rotate(-13, w/2, offset);
-		c1.rotate(-13, w/2, offset);
-		c.translate(w/2, offset);
-		c1.translate(w/2, offset);
-		c.drawLine(0, 0, (int)-A, 0, mBitmapPaintRingRadianLine);
-		c1.drawLine(0, 0, (int)-A, 0, mBitmapPaintRingRadianLine);
+		c.rotate(-10, w / 2, offset);
+		c1.rotate(-10, w / 2, offset);
+		c.translate(w / 2, offset);
+		c1.translate(w / 2, offset);
+		c.drawLine(0, 0, lenghtArrow, 0, mBitmapPaintRingRadianLine);
+		c1.drawLine(0, 0, lenghtArrow, 0, mBitmapPaintRingRadianLine);
 		c.save();
 		c1.save();
 		mExtRingTouch = mExtRing;
@@ -378,7 +360,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		mBitmapPaintTempText.setTextSize((h / 4 - h / 16 - h / 12) / 2);
+		mBitmapPaintTempText.setTextSize(h / 16);
 		drawRings(w, h);
 		mBitmapPaintUnable.setAlpha(mEnable ? 0 : 255);
 		mBitmapPaintRingRadianLine.setColor(Color.BLACK);
@@ -390,9 +372,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 				mRadiusStartButton, 0xFFEA0707, 0xFFA30707, TileMode.CLAMP));
 		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintStart);
 		mBitmapPaintRingRadianLine.setColor(0xAA000000);
-		c.drawCircle(w / 4, h / 4,
-				w / 4,
-				mBitmapPaintRingRadianLine);
+		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintRingRadianLine);
 		c.save();
 		mStartButtonGreenTouch = Bitmap.createBitmap(w / 2, h / 2,
 				Config.ARGB_4444);
@@ -400,18 +380,14 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		mBitmapPaintStart.setShader(new RadialGradient(w / 4, h / 4,
 				mRadiusStartButton, 0xFF449D44, 0xFF5CB85C, TileMode.CLAMP));
 		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintStart);
-		c.drawCircle(w / 4, h / 4,
-				w / 4,
-				mBitmapPaintRingRadianLine);
+		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintRingRadianLine);
 		c.save();
 		mStartButtonGreen = Bitmap.createBitmap(w / 2, h / 2, Config.ARGB_4444);
 		c = new Canvas(mStartButtonGreen);
 		mBitmapPaintStart.setShader(new RadialGradient(w / 4, h / 4,
 				mRadiusStartButton, 0xFF5CB85C, 0xFF449D44, TileMode.CLAMP));
 		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintStart);
-		c.drawCircle(w / 4, h / 4,
-				w / 4,
-				mBitmapPaintRingRadianLine);
+		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintRingRadianLine);
 		c.save();
 
 		mStartButtonUnable = Bitmap
@@ -421,50 +397,45 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		mBitmapPaintStart.setShader(new RadialGradient(w / 4, h / 4,
 				mRadiusStartButton, 0xFF666666, 0xFFaaaaaa, TileMode.CLAMP));
 		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintStart);
-		c.drawCircle(w / 4, h / 4,
-				w / 4,
-				mBitmapPaintRingRadianLine);
+		c.drawCircle(w / 4, h / 4, w / 4, mBitmapPaintRingRadianLine);
 		c.save();
 
 		mVisor = Bitmap.createBitmap(w, h, Config.ARGB_4444);
 		c = new Canvas(mVisor);
 		mBitmapPaintRingRadianLine.setColor(Color.BLACK);
+		RectF oval = new RectF(mBitmapPaintRingRadianLine.getStrokeWidth(),
+				mBitmapPaintRingRadianLine.getStrokeWidth(), w
+						- mBitmapPaintRingRadianLine.getStrokeWidth(), h
+						- mBitmapPaintRingRadianLine.getStrokeWidth());
+		c.save();
 		Path path = new Path();
-		path.moveTo(w / 2 - 20, 0);
-		path.lineTo(w / 2 + 20, 0);
-		path.lineTo(w / 2 + 20,
-				h / 12 - 2 * mBitmapPaintTempText.getFontMetricsInt().descent);
-		path.lineTo(w / 2, h / 12);
-		path.lineTo(w / 2 - 20,
-				h / 12 - 2 * mBitmapPaintTempText.getFontMetricsInt().descent);
-		path.lineTo(w / 2 - 20, 0);
-		mBitmapPaintRingRadianLine.setShader(new LinearGradient(w / 2 - 20, 0,
-				w / 2, 0, Color.BLACK, Color.GRAY, TileMode.MIRROR));
+		path.setFillType(Path.FillType.EVEN_ODD);
+		int widthVisor = (int) mBitmapPaintTempText.measureText(String
+				.valueOf(mExtNumberOfSector + mFirstValue));
+		mBitmapPaintRingRadianLine.setShader(new LinearGradient(w / 2
+				- widthVisor, 0, w / 2, 0, Color.BLACK, Color.GRAY,
+				TileMode.MIRROR));
 		mBitmapPaintRingRadianLine.setStyle(Style.FILL_AND_STROKE);
-		c.drawPath(path, mBitmapPaintRingRadianLine);
 		path.reset();
-		path.moveTo(w / 2, h / 12 + 
-				- mBitmapPaintTempText.getFontMetricsInt().ascent
+		path.moveTo(w / 2, h / 8
+				+ -mBitmapPaintTempText.getFontMetricsInt().ascent
 				+ mBitmapPaintTempText.getFontMetricsInt().descent);
-		path.lineTo(w / 2 + 20,
-				h / 12 + 
-						- mBitmapPaintTempText.getFontMetricsInt().ascent
-						+ mBitmapPaintTempText.getFontMetricsInt().descent
-						+  + 2
+		path.lineTo(w / 2 + widthVisor,
+				h / 8 + -mBitmapPaintTempText.getFontMetricsInt().ascent
+						+ mBitmapPaintTempText.getFontMetricsInt().descent + +2
 						* mBitmapPaintTempText.getFontMetricsInt().descent);
-		path.lineTo(w / 2 + 20, h / 2);
-		path.lineTo(w / 2 - 20, h / 2);
-		path.lineTo(w / 2 - 20,
-				h / 12 + 
-						- mBitmapPaintTempText.getFontMetricsInt().ascent
-						+ mBitmapPaintTempText.getFontMetricsInt().descent
-						+  + 2
+		path.lineTo(w / 2 + widthVisor, h / 2);
+		path.lineTo(w / 2 - widthVisor, h / 2);
+		path.lineTo(w / 2 - widthVisor,
+				h / 8 + -mBitmapPaintTempText.getFontMetricsInt().ascent
+						+ mBitmapPaintTempText.getFontMetricsInt().descent + +2
 						* mBitmapPaintTempText.getFontMetricsInt().descent);
-		path.lineTo(w / 2, h / 12 + 
-				- mBitmapPaintTempText.getFontMetricsInt().ascent
+		path.lineTo(w / 2, h / 8
+				+ -mBitmapPaintTempText.getFontMetricsInt().ascent
 				+ mBitmapPaintTempText.getFontMetricsInt().descent);
-		mBitmapPaintRingRadianLine.setShader(new LinearGradient(w / 2 - 20, 0,
-				w / 2, 0, Color.BLACK, Color.GRAY, TileMode.MIRROR));
+		mBitmapPaintRingRadianLine.setShader(new LinearGradient(w / 2
+				- widthVisor, 0, w / 2, 0, Color.BLACK, Color.GRAY,
+				TileMode.MIRROR));
 		c.drawPath(path, mBitmapPaintRingRadianLine);
 		mBitmapPaintRingRadianLine.setStyle(Style.STROKE);
 		mBitmapPaintRingRadianLine.setShader(null);
@@ -675,8 +646,6 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 		} else if (mTouch == Touchs.startButton) {
 			double r = getRadius(event.getX(), event.getY());
 			if (r <= mRadiusStartButton) {
-
-				drawRings(getWidth(), getHeight());
 				if (mOnTouchRingListener != null && mEnable) {
 					if (mSelectedSector != mExtCurrentSector) {
 						mSelectedSector = mExtCurrentSector;
@@ -685,6 +654,7 @@ public class WheelView extends View implements OnTouchListener, Runnable {
 					}
 				} else
 					mSelectedSector = mExtCurrentSector;
+				drawRings(getWidth(), getHeight());
 			}
 		}
 		mTouch = Touchs.nothing;
